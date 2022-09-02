@@ -6,11 +6,15 @@ const val SCORE_INCREASE = 20
 // Set with all the words for the Game
 val allWords: Set<String> =
     setOf(
-        "мама",
-        "папа",
+        "ветер",
+        "сон",
         "волк",
         "лиса",
         "собака",
         "дом",
         "из",
+        "небо",
+        "лес",
+        "вода",
+        "воздух",
     )
