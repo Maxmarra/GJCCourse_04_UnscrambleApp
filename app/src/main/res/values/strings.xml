@@ -8,6 +8,7 @@
     <string name="enter_your_word">введите свое слово</string>
     <string name="congratulations">Бинго!</string>
     <string name="you_scored">"Ваш счет: %d"</string>
+    <string name="guessedWords">"Вы расшифровали: %d слов(а)"</string>
     <string name="exit">Выход</string>
     <string name="play_again">Сыграть снова</string>
     <string name="wrong_guess">Не угадал!</string>
