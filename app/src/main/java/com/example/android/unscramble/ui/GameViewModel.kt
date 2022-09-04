@@ -18,7 +18,6 @@ import javax.inject.Inject
 class GameViewModel @Inject constructor(
     private val repository: PlayerRepository
 ) : ViewModel() {
-
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         var allPlayers: Flow<List<Player>> = repository.getPlayersRepo()
 
