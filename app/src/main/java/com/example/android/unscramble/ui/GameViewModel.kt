@@ -64,13 +64,11 @@ class GameViewModel : ViewModel() {
     }
 
     fun checkUserGuess() {
-
         if (userGuess.trim().lowercase().equals(currentWord, ignoreCase = true)) {
              // User's guess is correct, increase the score
             val updatedScore = _uiState.value.score.plus(SCORE_INCREASE)
             updateGameState(updatedScore)
             // Reset user guess
-
         } else {
             // Reset user guess
             //чистим неправильное слово
