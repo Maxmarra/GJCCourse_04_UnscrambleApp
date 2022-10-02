@@ -49,37 +49,18 @@ fun GameScreen(
             onKeyboardDone = { gameViewModel.checkUserGuess() },
             isGuessWrong = gameUiState.isGuessedWordWrong,
         )
-
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            OutlinedButton(
-                onClick = {gameViewModel.skipWord() },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(end = 8.dp)
-            ) {
-                Text(stringResource(R.string.skip))
-            }
-
-            Button(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .padding(start = 8.dp),
-                onClick = {gameViewModel.checkUserGuess() }
-            ) {
-                Text(stringResource(R.string.submit))
-            }
-        }
+        ButtonsLayout(
+            onSkip = { gameViewModel.skipWord() },
+            onSubmit = {gameViewModel.checkUserGuess() }
+        )
     }
 }
 
 @Composable
-fun GameStatus(wordCount: Int, score: Int, modifier: Modifier = Modifier) {
+fun GameStatus(
+    wordCount: Int,
+    score: Int,
+    modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -143,6 +124,40 @@ fun GameLayout(
                 onDone = { onKeyboardDone()}
             ),
         )
+    }
+}
+
+@Composable
+fun ButtonsLayout(
+    modifier: Modifier = Modifier,
+    onSkip:()->Unit,
+    onSubmit:()->Unit,
+) {
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp),
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
+        OutlinedButton(
+            onClick = onSkip,
+            modifier = Modifier
+                .weight(1f)
+                .padding(end = 8.dp)
+        ) {
+            Text(stringResource(R.string.skip))
+        }
+
+        Button(
+            modifier = modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(start = 8.dp),
+            onClick = onSubmit
+        ) {
+            Text(stringResource(R.string.submit))
+        }
     }
 }
 

@@ -63,13 +63,12 @@ class GameViewModel : ViewModel() {
     }
 
     fun checkUserGuess() {
-
         if (userGuess.trim().equals(currentWord, ignoreCase = true)) {
                 // User's guess is correct, increase the score
             val updatedScore = _uiState.value.score.plus(SCORE_INCREASE)
+            //при правильном ответе нужно обновить несколько позиций
+            //состояния GameUiState, поэтому делаем это через целый метод
             updateGameState(updatedScore)
-            // Reset user guess
-
         } else {
             // Reset user guess
             //чистим неправильное слово
@@ -80,6 +79,7 @@ class GameViewModel : ViewModel() {
             }
         }
     }
+
     private fun updateGameState(updatedScore: Int) {
         _uiState.update { currentState ->
             currentState.copy(
@@ -89,7 +89,7 @@ class GameViewModel : ViewModel() {
                 currentWordCount = currentState.currentWordCount.inc(),
             )
         }
-        //чистим отгаданное слово
+        //удаляем отгаданное слово
         updateUserGuess("")
     }
 
