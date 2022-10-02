@@ -13,22 +13,17 @@ import kotlinx.coroutines.flow.update
 class GameViewModel : ViewModel() {
 
     private lateinit var currentWord: String
-
-    // Set of words used in the game
     private var usedWords: MutableSet<String> = mutableSetOf()
 
-    // Game UI state
     private val _uiState = MutableStateFlow(GameUiState())
-
-    // Backing property to avoid state updates from other classes
     val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()
 
     var userGuess by mutableStateOf("")
+        //we can set the name only in a method inside the class because of private modifier near set accessor.
+        // you can ONLY set the value by using a method inside a class
         private set
 
-    init {
-        resetGame()
-    }
+    init {resetGame()}
 
     private fun pickRandomWordAndShuffle(): String {
         // Continue picking up a new random word until you get one that hasn't been used before
@@ -62,13 +57,10 @@ class GameViewModel : ViewModel() {
     }
 
     fun checkUserGuess() {
-
         if (userGuess.equals(currentWord, ignoreCase = true)) {
 
         } else {
-            // Reset user guess
             updateUserGuess("")
-            // User's guess is wrong, show an error
             _uiState.update { currentState ->
                 currentState.copy(isGuessedWordWrong = true)
             }

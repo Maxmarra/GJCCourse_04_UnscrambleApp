@@ -50,6 +50,7 @@ fun GameScreen(
     ) {
 
         GameStatus()
+
         GameLayout(
             currentScrambledWord = gameUiState.currentScrambledWord,
             userGuess = gameViewModel.userGuess,
@@ -110,12 +111,13 @@ fun GameStatus(modifier: Modifier = Modifier) {
 
 @Composable
 fun GameLayout(
-    onUserGuessChanged: (String) -> Unit,
-    onKeyboardDone: () -> Unit,
-    isGuessWrong: Boolean,
-    modifier: Modifier = Modifier,
     currentScrambledWord: String,
     userGuess: String,
+    onUserGuessChanged: (String) -> Unit,
+    isGuessWrong: Boolean,
+    onKeyboardDone: () -> Unit,
+    modifier: Modifier = Modifier,
+
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(24.dp),
