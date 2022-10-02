@@ -8,21 +8,17 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class GameViewModel : ViewModel() {
 
-    private lateinit var currentWord: String
-    // Set of words used in the game
-    private var usedWords: MutableSet<String> = mutableSetOf()
-
-    // Game UI state
     private val _uiState = MutableStateFlow(GameUiState())
-    // Backing property to avoid state updates from other classes
     val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()
+
+    private lateinit var currentWord: String
+    private var usedWords: MutableSet<String> = mutableSetOf()
 
     init {
         resetGame()
     }
 
     private fun pickRandomWordAndShuffle(): String {
-        // Continue picking up a new random word until you get one that hasn't been used before
         currentWord = allWords.random()
         if (usedWords.contains(currentWord)) {
             return pickRandomWordAndShuffle()
@@ -34,7 +30,6 @@ class GameViewModel : ViewModel() {
 
     private fun shuffleCurrentWord(word: String): String {
         val tempWord = word.toCharArray()
-        // Scramble the word
         tempWord.shuffle()
         while (tempWord.toString() == word) {
             tempWord.shuffle()
@@ -44,7 +39,8 @@ class GameViewModel : ViewModel() {
 
     fun resetGame() {
         usedWords.clear()
-        _uiState.value =
-            GameUiState(currentScrambledWord = pickRandomWordAndShuffle())
+        _uiState.value = GameUiState(
+            currentScrambledWord = pickRandomWordAndShuffle()
+        )
     }
 }
